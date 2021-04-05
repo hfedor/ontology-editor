@@ -1,0 +1,9 @@
+/home/hfedorow/ontology-editor/src/main/java/movies/spring/data/neo4j/api/MovieController.java
+/home/hfedorow/ontology-editor/src/main/java/movies/spring/data/neo4j/movies/MovieDetailsDto.java
+/home/hfedorow/ontology-editor/src/main/java/movies/spring/data/neo4j/movies/Movie.java
+/home/hfedorow/ontology-editor/src/main/java/movies/spring/data/neo4j/movies/MovieResultDto.java
+/home/hfedorow/ontology-editor/src/main/java/movies/spring/data/neo4j/SampleMovieApplication.java
+/home/hfedorow/ontology-editor/src/main/java/movies/spring/data/neo4j/movies/CastMemberDto.java
+/home/hfedorow/ontology-editor/src/main/java/movies/spring/data/neo4j/DatabaseConfig.java
+/home/hfedorow/ontology-editor/src/main/java/movies/spring/data/neo4j/movies/MovieService.java
+/home/hfedorow/ontology-editor/src/main/java/movies/spring/data/neo4j/movies/MovieRepository.java
