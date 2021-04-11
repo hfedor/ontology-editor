@@ -28,6 +28,11 @@ class MovieController {
 		return movieService.fetchDetailsByTitle(title);
 	}
 
+	@GetMapping("/hello")
+	public String helloEndpoint() {
+		return "Hello world again and again!";
+	}
+
 	@GetMapping("/search")
 	List<MovieResultDto> search(@RequestParam("q") String title) {
 		return movieService.searchMoviesByTitle(stripWildcards(title));
