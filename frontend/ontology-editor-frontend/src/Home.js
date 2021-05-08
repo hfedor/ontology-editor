@@ -10,8 +10,9 @@ class Home extends Component {
             <div>
                 <AppNavbar/>
                 <Container fluid>
-                    <h3 className="text-center">Welcome to the Ontology Editor</h3>
-                    <Button color="primary"><Link to="/ontologies">Manage your ontologies</Link></Button>
+                    <h1 className="text-center" style={{marginBottom: "100px"}}>Ontology Editor</h1>
+                    <Button color="success" size="lg" block tag={Link} to="/ontologies">Manage ontologies</Button>
+                    <Button color="success" size="lg" block tag={Link} to="#">Load new ontology</Button>
                 </Container>
             </div>
         );

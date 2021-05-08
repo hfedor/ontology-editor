@@ -1,1 +1,4 @@
+com/pik/ontologyeditor/model/Ontology.class
+com/pik/ontologyeditor/web/OntologyController.class
+com/pik/ontologyeditor/model/OntologyRepository.class
 com/pik/ontologyeditor/OntologyEditorApplication.class

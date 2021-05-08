@@ -56,14 +56,14 @@ class OntologyList extends Component {
                 <AppNavbar/>
                 <Container fluid>
                     <div className="float-right">
-                        <Button color="success" tag={Link} to="/ontologies/new">Add ontology</Button>
+                        <Button color="success" tag={Link} to="/ontologies/new">Add ontology manually</Button>
                     </div>
-                    <h3>Ontology Editor</h3>
+                    <h3>Ontologies</h3>
                     <Table className="mt-4">
                         <thead>
                         <tr>
                             <th width="20%">Name</th>
-                            <th>Description</th>
+                            <th width="70%">Description</th>
                         </tr>
                         </thead>
                         <tbody>
