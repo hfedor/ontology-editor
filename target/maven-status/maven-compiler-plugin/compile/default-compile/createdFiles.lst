@@ -1,9 +1,0 @@
-movies/spring/data/neo4j/movies/MovieDetailsDto.class
-movies/spring/data/neo4j/SampleMovieApplication.class
-movies/spring/data/neo4j/movies/MovieRepository.class
-movies/spring/data/neo4j/api/MovieController.class
-movies/spring/data/neo4j/movies/MovieResultDto.class
-movies/spring/data/neo4j/movies/Movie.class
-movies/spring/data/neo4j/DatabaseConfig.class
-movies/spring/data/neo4j/movies/CastMemberDto.class
-movies/spring/data/neo4j/movies/MovieService.class
