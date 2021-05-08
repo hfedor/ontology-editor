@@ -7,7 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OntologyEditorApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OntologyEditorApplication.class, args);
+		try {
+			SpringApplication.run(OntologyEditorApplication.class, args);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
