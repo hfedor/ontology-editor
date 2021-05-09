@@ -23,6 +23,6 @@ public class OntologyEditorApplication implements CommandLineRunner {
 	public void run(String... arg) throws Exception {
 		storageService.deleteAll();
 		storageService.init();
-		addFileToDB.AddFile("https://github.com/neo4j-labs/neosemantics/raw/3.5/docs/rdf/vw.owl");
+		addFileToDB.AddFile("https://github.com/neo4j-labs/neosemantics/raw/3.5/docs/rdf/vw.owl", "Turtle");
 	}
 }

@@ -25,7 +25,7 @@ public class AddFileToDB implements AutoCloseable
         driver.close();
     }
 
-    public void AddFile( final String path )
+    public void AddFile( final String path, final String format )
     {
         try ( Session session = driver.session() )
         {
@@ -34,8 +34,8 @@ public class AddFileToDB implements AutoCloseable
                 @Override
                 public String execute( Transaction tx )
                 {
-                    Result result = tx.run( "CALL n10s.onto.import.fetch($path,\"Turtle\")",
-                            parameters( "path", path ) );
+                    Result result = tx.run( "CALL n10s.onto.import.fetch($path,$format)",
+                            parameters( "path", path, "format", format ) );
                     return result.single().get( 0 ).asString();
                 }
             } );
