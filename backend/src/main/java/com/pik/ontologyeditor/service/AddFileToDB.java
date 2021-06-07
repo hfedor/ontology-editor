@@ -25,6 +25,22 @@ public class AddFileToDB implements AutoCloseable
         driver.close();
     }
 
+    public void printGreeting()
+    {
+        try ( Session session = driver.session() )
+        {
+            String greeting = session.writeTransaction( new TransactionWork<String>()
+            {
+                @Override
+                public String execute( Transaction tx )
+                {
+                    Result result = tx.run( "Match (n:Greeting) return properties(n), ID(n) ");
+                    return result.single().get(0).toString();
+                }
+            } );
+        }
+    }
+
     public void AddFile( final String path, final String format )
     {
         try ( Session session = driver.session() )
@@ -41,4 +57,6 @@ public class AddFileToDB implements AutoCloseable
             } );
         }
     }
+
+
 }

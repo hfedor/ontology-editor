@@ -34,6 +34,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
             Path path = root.resolve(file.getOriginalFilename());
             System.out.println(path.toUri().normalize());
             AddFileToDB addFileToDB = new AddFileToDB("bolt://localhost:7687", "neo4j", "koperwas123");
+            addFileToDB.printGreeting();
             addFileToDB.AddFile(path.toUri().normalize().toString(), "Turtle");
         } catch (Exception e) {
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
