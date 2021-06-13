@@ -3,6 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import UploadFiles from "./components/upload-files.component";
+import NodeDiv from "./components/NodeDiv";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         </div>
 
         <UploadFiles/>
+          <NodeDiv/>
       </div>
   );
 }
