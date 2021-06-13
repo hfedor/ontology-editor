@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
-import {Card, Table, Image, ButtonGroup, Button, InputGroup, FormControl} from 'react-bootstrap';
-import NodeDiv from './NodeDiv';
+import {Table} from 'react-bootstrap';
+import NodeListElem from './NodeListElem';
 
 import './styles/NodesList.css';
 
 import axios from 'axios';
 
-export default class NodesList extends Component {
+export default class NodesList extends React.Component {
     constructor(props) {
         super(props);
 
@@ -15,6 +15,16 @@ export default class NodesList extends Component {
             id: props.id,
             ids: [],
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({ id: nextProps.id });
+        axios.get("http://localhost:8080/related?id=" + nextProps.id)
+            .then(response => response.data)
+            .then((data) => {
+                this.setState({ids: data});
+            });
+        console.log("NodesList.ids: "+ this.state.ids);
     }
 
     componentDidMount(){
@@ -26,6 +36,7 @@ export default class NodesList extends Component {
     }
 
     render() {
+        var handleToUpdate = this.props.handleToUpdate;
         return (
             <div className={"nodes_list"}>
                 <Table bordered hover striped varian="dark">
@@ -38,10 +49,10 @@ export default class NodesList extends Component {
                     </thead>
                     <tbody>
                     {
-                        this.state.ids ?
+                        this.state.ids && this.state.ids.length > 0 ?
                             <tr align="center">
                                 {<td>{this.state.ids.map((id, i) => {
-                                    return (<NodeDiv id={id}/>)
+                                    return (<NodeListElem id={id} handleToUpdate={handleToUpdate}/>)
                                 })}
                                 </td>}
                             </tr> :

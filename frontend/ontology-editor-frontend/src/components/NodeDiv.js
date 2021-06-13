@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 
-import {Card, Table, Image, ButtonGroup, Button, InputGroup, FormControl} from 'react-bootstrap';
+import {Table} from 'react-bootstrap';
 
 import "./styles/NodeDiv.css"
 
-import ReadNodesService from "../services/read-nodes.service";
-
 import axios from 'axios';
 
-export default class NodeDiv extends Component {
+export default class NodeDiv extends React.Component {
     constructor(props) {
         super(props);
 
@@ -16,6 +14,16 @@ export default class NodeDiv extends Component {
             id: props.id,
             node: undefined,
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({ id: nextProps.id });
+        console.log("NodeDIv.componentWillReceiveProps: "+nextProps.id);
+        axios.get("http://localhost:8080/node?id=" + nextProps.id)
+            .then(response => response.data)
+            .then((data) => {
+                this.setState({node: data});
+            });
     }
 
     componentDidMount(){
@@ -29,6 +37,7 @@ export default class NodeDiv extends Component {
     render() {
         return (
             <div className={"node_div"}>
+                <div>{this.state.id}</div>
                 <Table bordered hover striped varian="dark">
                     <thead>
                         <tr>

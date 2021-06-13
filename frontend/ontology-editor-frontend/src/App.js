@@ -5,12 +5,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import UploadFiles from "./components/upload-files.component";
 import NodeDiv from "./components/NodeDiv";
 import NodesList from "./components/NodesList";
+import SearchByID from "./components/SearchByID";
 
 function App() {
   return (
       <>
           <div>
-              <NodesList id={"215"}/>
+              <SearchByID/>
           </div>
           <div className="container" style={{ width: "600px" }}>
               <div style={{ margin: "20px" }}>
