@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.google.gson.Gson;
+
 import com.pik.ontologyeditor.neo4jMapping.Property;
 
 public class Mapping {
@@ -226,5 +228,45 @@ public class Mapping {
             Node new_node = new Node(ID, new_labels, properties_list);
             return new_node;
         }
+    }
+
+    public List<Integer> GetRelatedByParentsID(int ID){
+
+        List<Integer> related = new ArrayList<Integer>();
+
+        try ( Session session = driver.session() )
+        {
+            String ids_s = session.writeTransaction( new TransactionWork<String>()
+            {
+                @Override
+                public String execute( Transaction tx )
+                {
+                    Result result = tx.run( "MATCH (p)--(r)\n" +
+                                    " WHERE ((p)-->(r) OR (p)<--(r)) AND ID(p) = $ID\n" +
+                                    " return ID(r)",
+                            parameters( "ID", ID ) );;
+
+                    List<org.neo4j.driver.Record> records = result.list();
+
+                    String s = "";
+
+                    for ( org.neo4j.driver.Record r : records)
+                        s += r.values();
+
+                    return s;
+                }
+            } );
+
+            related = GetIDsFromString(ids_s);
+        }
+        return related;
+    }
+
+    public String NodesToJSON(List<Node> nodes)
+    {
+        String json = new Gson().toJson(nodes);
+
+        System.out.print(json);
+        return json;
     }
 }
