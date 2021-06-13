@@ -1,5 +1,6 @@
 package com.pik.ontologyeditor.neo4jMapping;
 
+import com.google.gson.Gson;
 import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
@@ -90,6 +91,48 @@ public class Mapping {
                 children.add(GetNodeByID(i));
         }
         return children;
+    }
+
+    public List<Node> GetRelatedByParentsID(int ID){
+
+        List<Node> related = new ArrayList<Node>();
+
+        try ( Session session = driver.session() )
+        {
+            String ids_s = session.writeTransaction( new TransactionWork<String>()
+            {
+                @Override
+                public String execute( Transaction tx )
+                {
+                    Result result = tx.run( "MATCH (p)--(r)\n" +
+                                    " WHERE ((p)-->(r) OR (p)<--(r)) AND ID(p) = $ID\n" +
+                                    " return ID(r)",
+                            parameters( "ID", ID ) );;
+
+                    List<org.neo4j.driver.Record> records = result.list();
+
+                    String s = "";
+
+                    for ( org.neo4j.driver.Record r : records)
+                        s += r.values();
+
+                    return s;
+                }
+            } );
+
+            List<Integer> ids = GetIDsFromString(ids_s);
+            for(Integer i : ids)
+                related.add(GetNodeByID(i));
+        }
+        return related;
+    }
+
+    public String NodesToJSON(List<Node> nodes)
+    {
+        String json = new Gson().toJson(nodes);
+
+        System.out.print(json);
+        return json;
     }
 
     public Property GetPropertyFromString( String s, AtomicInteger iter)

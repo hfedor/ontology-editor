@@ -24,10 +24,11 @@ public class OntologyEditorApplication implements CommandLineRunner {
 		storageService.deleteAll();
 		storageService.init();
 
-
 		Mapping mapping = new Mapping("bolt://localhost:7687", "neo4j", "koperwas123");
 		mapping.GetNodeByID(206);
 		mapping.GetRoots();
 		mapping.GetChildrenByParentsID(206);
+		mapping.GetRelatedByParentsID(215);
+		mapping.NodesToJSON(mapping.GetRelatedByParentsID(215));
 	}
 }
