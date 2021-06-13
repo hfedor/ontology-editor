@@ -13,26 +13,32 @@ export default class NodeListElem extends React.Component {
         super(props);
 
         this.state = {
-            id: props.id,
+            id: this.props.id,
             node: undefined,
         };
+        console.log("NodeListElem.constructor")
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({ id: nextProps.id });
-        this.setState({ node: undefined });
-        console.log("NodeListElem::componentWillReceiveProps: this.state.id="+nextProps.id);
         axios.get("http://localhost:8080/node?id=" + nextProps.id)
             .then(response => response.data)
             .then((data) => {
                 this.setState({node: data});
             });
-        console.log("NodeListElem::componentWillReceiveProps: this.state.node="+this.state.node);
     }
 
     componentDidMount(){
-        console.log("NodeListElem::componentDidMount: this.state.id="+this.state.id);
-        this.setState({ node: undefined });
+        console.log("NodeListElem.componentDidMount")
+        axios.get("http://localhost:8080/node?id=" + this.state.id)
+            .then(response => response.data)
+            .then((data) => {
+                this.setState({node: data});
+            });
+    }
+
+    componenDidUbdate(){
+        console.log("NodeListElem.componenDidUbdate")
         axios.get("http://localhost:8080/node?id=" + this.state.id)
             .then(response => response.data)
             .then((data) => {
@@ -48,8 +54,8 @@ export default class NodeListElem extends React.Component {
                     <thead>
                     <tr>
                         <th>
-                            {this.state.node ? <label>Node {this.state.id}</label> : <label>Brak Noda</label>}
-                            <Button variant="outline-primary" onClick={ () => handleToUpdate(this.state.id)}>Przejdź do Noda</Button>
+                            {this.state.node ? <div id={"node_elem_title"}>Node {this.state.id}</div> : <label>Brak Noda</label>}
+                            <Button id={"go_to_node_button"} variant="outline-primary" onClick={ () => handleToUpdate(this.state.id)}>Przejdź do Noda</Button>
                         </th>
                     </tr>
                     </thead>
@@ -57,9 +63,11 @@ export default class NodeListElem extends React.Component {
                     {
                         this.state.node ?
                             <tr align="center">
-                                {<td>{this.state.node.label.map((label, i) => {
-                                    return (<div>{label}</div>)
-                                })}
+                                {<td>
+                                    <div id={"labels_label"}>Label'e: </div>
+                                    {this.state.node.label.map((label, i) => {
+                                        return (<div className={"label_div"}>{label}</div>)
+                                    })}
                                 </td>}
                             </tr> :
                             <tr align="center">
@@ -69,12 +77,14 @@ export default class NodeListElem extends React.Component {
                     {
                         this.state.node ?
                             <tr align="center">
-                                {<td>{this.state.node.properties.map((property, i) => {
-                                    return (
-                                        <div>
-                                            {property.name}: {property.value}
-                                        </div>)
-                                })}
+                                {<td>
+                                    <div id={"properties_label"}>Propety'sy: </div>
+                                    {this.state.node.properties.map((property, i) => {
+                                        return (
+                                            <div className={"property_div"}>
+                                                {property.name}: {property.value}
+                                            </div>)
+                                    })}
                                 </td>}
                             </tr> :
                             <tr align="center">

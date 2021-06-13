@@ -2,3 +2,45 @@
     background-color: bisque;
     padding: 5px;
 }
+
+.label_div{
+    float: left;
+    margin-right: 15px;
+    padding: 5px;
+    border-style:solid;
+    border-radius: 10px;
+    border-width: 1px;
+}
+
+.property_div{
+    float: left;
+    margin-right: 15px;
+    padding: 5px;
+    border-style:solid;
+    border-radius: 10px;
+    border-width: 1px;
+}
+
+#labels_label{
+    float: left;
+    margin-right: 10px;
+}
+
+#properties_label{
+    float: left;
+    margin-right: 10px;
+}
+
+#node_elem_title{
+    float: left;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+#go_to_node_button{
+    float: left;
+}
+
+.node_table{
+    border-radius: 10px;
+}

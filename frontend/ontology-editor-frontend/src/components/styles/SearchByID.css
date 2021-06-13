@@ -1,5 +1,27 @@
-.search_by_id{
+#search_by_id{
     background-color: bisque;
-    margin: 5px;
+    margin: 10px 5px 5px 5px;
     padding: 5px 5px 5px 50px;
+    text-align: center;
+}
+
+#search_label{
+    font-size: 20px;
+    margin: 10px 15px 5px 15px;
+    float: left;
+}
+
+#search-input{
+    margin: 5px;
+    padding: 5px;
+    float: left;
+}
+
+#search_button{
+    margin: 5px 5px 5px 5px;
+    float: left;
+}
+
+.clear_both{
+    clear: both;
 }

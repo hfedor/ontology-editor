@@ -37,11 +37,10 @@ export default class SearchByID extends React.Component {
 
         return (
             <div>
-                {this.state.searchID}
                 <div className={"search_by_id"}>
-                    Wysukiwanie po ID
-                    <SearchInput className="search-input" onChange={this.changeSearchInput} />
-                    <Button variant="outline-primary" onClick={this.clickSearchButton}>Szukaj</Button>
+                    <div id={"search_label"}>Wyszukiwanie po ID</div>
+                    <SearchInput id="search-input" onChange={this.changeSearchInput} />
+                    <Button id={"search_button"} variant="outline-primary" onClick={this.clickSearchButton}>Szukaj</Button>
                 </div>
                 <NodeDiv id={this.state.searchID} />
                 <NodesList id={this.state.searchID} handleToUpdate={this.searchUpdate.bind(this)}/>
@@ -64,6 +63,5 @@ export default class SearchByID extends React.Component {
 
     clickSearchButton(){
         this.setState({searchID: this.state.searchIDInput});
-        this.forceUpdate();
     }
 }

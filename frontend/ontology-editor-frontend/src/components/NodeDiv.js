@@ -4,6 +4,8 @@ import {Table} from 'react-bootstrap';
 
 import "./styles/NodeDiv.css"
 
+import NodeEditor from "./NodeEditor";
+
 import axios from 'axios';
 
 export default class NodeDiv extends React.Component {
@@ -37,8 +39,7 @@ export default class NodeDiv extends React.Component {
     render() {
         return (
             <div className={"node_div"}>
-                <div>{this.state.id}</div>
-                <Table bordered hover striped varian="dark">
+                <Table className={"node_table"} bordered hover striped varian="dark">
                     <thead>
                         <tr>
                             <th>
@@ -50,8 +51,10 @@ export default class NodeDiv extends React.Component {
                         {
                             this.state.node ?
                             <tr align="center">
-                                {<td>{this.state.node.label.map((label, i) => {
-                                    return (<div>{label}</div>)
+                                {<td>
+                                    <div id={"labels_label"}>Label'e: </div>
+                                    {this.state.node.label.map((label, i) => {
+                                    return (<div className={"label_div"}>{label}</div>)
                                 })}
                                 </td>}
                             </tr> :
@@ -61,15 +64,48 @@ export default class NodeDiv extends React.Component {
                         }
                         {
                             this.state.node ?
-                                <tr align="center">
-                                    {<td>{this.state.node.properties.map((property, i) => {
+                                (<tr align="center">
+                                    {<td>
+                                        <div id={"properties_label"}>Propety'sy: </div>
+                                        {this.state.node.properties.map((property, i) => {
                                         return (
-                                            <div>
+                                                <div className={"property_div"}>
                                                 {property.name}: {property.value}
                                             </div>)
                                     })}
                                     </td>}
-                                </tr> :
+                                </tr>
+                                ) :
+                                <tr align="center">
+                                    <td>Brak Nodów</td>
+                                </tr>
+                        }
+                        {
+                            this.state.node ?
+                                (<tr align="center">
+                                        {<td>
+                                            <div id={"properties_label"}>Propety'sy: </div>
+                                            {this.state.node.properties.map((property, i) => {
+                                                return (
+                                                    <div className={"property_div"}>
+                                                        {property.name}: {property.value}
+                                                    </div>)
+                                            })}
+                                        </td>}
+                                    </tr>
+                                ) :
+                                <tr align="center">
+                                    <td>Brak Nodów</td>
+                                </tr>
+                        }
+                        {
+                            this.state.node ?
+                                (<tr align="center">
+                                        {<td>
+                                            <NodeEditor/>
+                                        </td>}
+                                    </tr>
+                                ) :
                                 <tr align="center">
                                     <td>Brak Nodów</td>
                                 </tr>
