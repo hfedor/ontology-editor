@@ -94,6 +94,26 @@ public class Mapping {
         return children;
     }
 
+    public String UpdatePropertyName(int ID, String name, String value){
+        try ( Session session = driver.session() )
+        {
+            String str = session.writeTransaction( new TransactionWork<String>()
+            {
+                @Override
+                public String execute( Transaction tx )
+                {
+                    Result result = tx.run( "MATCH (n) WHERE ID(n) = $ID\n" +
+                                    " SET n.$property_name = '$new_value'\n" +
+                                    " RETURN n",
+                            parameters( "ID", ID, "property_name", name, "new_value", value ) );;
+                    return result.single().get(0).toString();
+                }
+            } );
+            System.out.print(str);
+            return str;
+        }
+    }
+
     public Property GetPropertyFromString( String s, AtomicInteger iter)
     {
         String name = "";

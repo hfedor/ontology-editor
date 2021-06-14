@@ -29,5 +29,6 @@ public class OntologyEditorApplication implements CommandLineRunner {
 		mapping.GetNodeByID(206);
 		mapping.GetRoots();
 		mapping.GetChildrenByParentsID(206);
+		//mapping.UpdatePropertyName(206,"uri", "http://localhost/ontologies/2019/1/10/automobile#Beetle_Convertible");
 	}
 }

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import {Table} from 'react-bootstrap';
 
+import {Button} from 'react-bootstrap';
+
 import "./styles/NodeDiv.css"
 
 import NodeEditor from "./NodeEditor";
@@ -15,12 +17,26 @@ export default class NodeDiv extends React.Component {
         this.state = {
             id: props.id,
             node: undefined,
+            edited_property: undefined,
         };
+
+        this.setEditedProperty = this.setEditedProperty.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
+    }
+
+    handleUpdate = () => {
+        this.forceUpdate();
+    };
+
+    setEditedProperty(property){
+        this.setState({edited_property : property});
+        console.log(this.state.edited_property);
+        this.handleUpdate();
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({ id: nextProps.id });
-        console.log("NodeDIv.componentWillReceiveProps: "+nextProps.id);
+        this.setState({ edited_property: nextProps.edited_property });
         axios.get("http://localhost:8080/node?id=" + nextProps.id)
             .then(response => response.data)
             .then((data) => {
@@ -69,9 +85,14 @@ export default class NodeDiv extends React.Component {
                                         <div id={"properties_label"}>Propety'sy: </div>
                                         {this.state.node.properties.map((property, i) => {
                                         return (
-                                                <div className={"property_div"}>
-                                                {property.name}: {property.value}
-                                            </div>)
+                                            <div class={"property_button_div"}>
+                                                <Button  variant="outline-primary"
+                                                        onClick={() => this.setEditedProperty(property)}
+                                                >
+                                                    {property.name}: {property.value}
+                                                </Button>
+                                            </div>
+                                        )
                                     })}
                                     </td>}
                                 </tr>
@@ -81,33 +102,18 @@ export default class NodeDiv extends React.Component {
                                 </tr>
                         }
                         {
-                            this.state.node ?
+                            this.state.edited_property ?
                                 (<tr align="center">
                                         {<td>
-                                            <div id={"properties_label"}>Propety'sy: </div>
-                                            {this.state.node.properties.map((property, i) => {
-                                                return (
-                                                    <div className={"property_div"}>
-                                                        {property.name}: {property.value}
-                                                    </div>)
-                                            })}
+                                            <NodeEditor
+                                                property_name={this.state.edited_property.name}
+                                                property_value={this.state.edited_property.value}
+                                                handleToUpdate={this.handleUpdate}
+                                            />
                                         </td>}
                                     </tr>
                                 ) :
                                 <tr align="center">
-                                    <td>Brak Nodów</td>
-                                </tr>
-                        }
-                        {
-                            this.state.node ?
-                                (<tr align="center">
-                                        {<td>
-                                            <NodeEditor/>
-                                        </td>}
-                                    </tr>
-                                ) :
-                                <tr align="center">
-                                    <td>Brak Nodów</td>
                                 </tr>
                         }
                     </tbody>

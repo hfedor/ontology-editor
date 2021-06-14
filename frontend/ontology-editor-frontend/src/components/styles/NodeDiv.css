@@ -21,6 +21,11 @@
     border-width: 1px;
 }
 
+.property_button_div{
+    float: left;
+    padding: 5px;
+}
+
 #labels_label{
     float: left;
     margin-right: 10px;

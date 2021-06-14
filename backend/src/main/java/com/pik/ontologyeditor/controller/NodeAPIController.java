@@ -30,6 +30,12 @@ public class NodeAPIController {
         return mapping.GetRelatedByParentsID(id);
     }
 
+    @GetMapping("/update")
+    public void updatePropertyName(@RequestParam Integer id, @RequestParam String name, @RequestParam String value) {
+        Mapping mapping = new Mapping("bolt://localhost:7687", "neo4j", "koperwas123");
+        mapping.UpdatePropertyName(id, name, value);
+    }
+
     @GetMapping("/hello")
     public String hello(){
         return "hello";

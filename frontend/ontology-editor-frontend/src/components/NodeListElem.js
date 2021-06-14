@@ -16,7 +16,6 @@ export default class NodeListElem extends React.Component {
             id: this.props.id,
             node: undefined,
         };
-        console.log("NodeListElem.constructor")
     }
 
     componentWillReceiveProps(nextProps) {
