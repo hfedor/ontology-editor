@@ -14,6 +14,7 @@ export default class NodeEditor extends React.Component {
             property_name: props.property_name,
             property_value: props.property_value,
             radioValue: 1,
+            id: props.id,
         };
         this.handleUpdate = this.handleUpdate.bind(this);
         this.handleToUpdate = this.handleToUpdate.bind(this);
@@ -21,7 +22,6 @@ export default class NodeEditor extends React.Component {
 
     handleUpdate(){
         this.forceUpdate();
-        console.log(this.state.radioValue);
     }
 
     handleToUpdate(){
@@ -61,6 +61,7 @@ export default class NodeEditor extends React.Component {
                         <PropertyEditor
                             name={this.state.property_name}
                             value={this.state.property_value}
+                            id={this.state.id}
                         /> :
                         <div></div>
                 }

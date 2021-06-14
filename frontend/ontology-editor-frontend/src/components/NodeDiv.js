@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 
-import {Table} from 'react-bootstrap';
-
-import {Button} from 'react-bootstrap';
+import {Table, Button} from 'react-bootstrap';
 
 import "./styles/NodeDiv.css"
 
@@ -109,6 +107,7 @@ export default class NodeDiv extends React.Component {
                                                 property_name={this.state.edited_property.name}
                                                 property_value={this.state.edited_property.value}
                                                 handleToUpdate={this.handleUpdate}
+                                                id={this.state.id}
                                             />
                                         </td>}
                                     </tr>

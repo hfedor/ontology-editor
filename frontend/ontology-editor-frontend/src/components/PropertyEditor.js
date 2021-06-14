@@ -20,12 +20,14 @@ export default class PropertyEditor extends React.Component {
 
         this.handleChangeValue = this.handleChangeValue.bind(this);
         this.handleChangeName = this.handleChangeName.bind(this);
+        this.updatePropertyValue = this.updatePropertyValue.bind(this);
         this.updatePropertyName = this.updatePropertyName.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({ name: nextProps.name });
         this.setState({ value: nextProps.value });
+        this.setState({ id: nextProps.id });
     }
 
     handleChangeValue(event) {
@@ -36,8 +38,9 @@ export default class PropertyEditor extends React.Component {
         this.setState({name: event.target.value});
     }
 
-    updatePropertyName(){
-        axios.get("http://localhost:8080/update/property/name?id=" + this.state.id
+    updatePropertyValue(){
+        this.forceUpdate();
+        axios.get("http://localhost:8080/update/property/value?id=" + this.state.id
             + "&&name=" + this.state.old_name
             + "&&value=" + this.state.value)
             .then(response => response.data)
@@ -46,8 +49,18 @@ export default class PropertyEditor extends React.Component {
             });
     }
 
+    updatePropertyName(){
+        this.forceUpdate();
+        axios.get("http://localhost:8080/update/property/name?id=" + this.state.id
+            + "&&old_name=" + this.state.old_name
+            + "&&new_name=" + this.state.name)
+            .then(response => response.data)
+            .then((data) => {
+                this.setState({node: data});
+            });
+    }
+
     render() {
-        var handleToUpdate = this.props.handleToUpdate;
         return (
             <div id={"property_editor"}>
                 <div className={"textarea_div"}>
@@ -56,10 +69,10 @@ export default class PropertyEditor extends React.Component {
                        type="textarea"
                        name="property_name"
                        value={this.state.name}
-                       onChange={() => {this.handleChangeName(); handleToUpdate()}}
+                       onChange={this.handleChangeName}
                     />
                     <div>
-                        <Button className={"textarea_button"} variant="outline-primary" block onClick={this.clickSearchButton}>Zmień</Button>
+                        <Button className={"textarea_button"} variant="outline-primary" block onClick={this.updatePropertyName}>Zmień</Button>
                     </div>
                 </div>
                 <div className={"textarea_div"}>
@@ -71,7 +84,7 @@ export default class PropertyEditor extends React.Component {
                        onChange={this.handleChangeValue}
                     />
                     <div>
-                        <Button className={"textarea_button"} variant="outline-primary" block onClick={this.clickSearchButton}>Zmień</Button>
+                        <Button className={"textarea_button"} variant="outline-primary" block onClick={this.updatePropertyValue}>Zmień</Button>
                     </div>
                 </div>
             </div>
