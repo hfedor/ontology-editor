@@ -58,6 +58,9 @@ export default class NodeDiv extends React.Component {
                         <tr>
                             <th>
                                 {this.state.node ? <label>Node {this.state.node.id}</label> : <label>Brak Noda</label>}
+                                <Button variant="outline-primary" icon="refresh" onClick={() => {this.handleUpdate()}}>
+                                    Odśwież
+                                </Button>
                             </th>
                         </tr>
                     </thead>

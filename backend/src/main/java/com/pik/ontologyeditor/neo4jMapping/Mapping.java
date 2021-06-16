@@ -121,7 +121,7 @@ public class Mapping {
                 @Override
                 public String execute( Transaction tx )
                 {
-                    Result result = tx.run( "MATCH (n) WHERE ID(n) = "+ID+" AND n."+old_name+" IS NOT null\n" +
+                    Result result = tx.run( "MATCH (n) WHERE ID(n) = "+ID+" AND EXISTS(n."+old_name+") AND NOT EXISTS(n."+new_name+")\n" +
                             "SET n."+new_name+"=n."+old_name+" \n" +
                             "REMOVE n."+old_name+"\n" +
                             "RETURN n;");;
